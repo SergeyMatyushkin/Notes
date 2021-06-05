@@ -1,13 +1,46 @@
 package com.example.notes;
 
-public class NotesEntity {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NotesEntity implements Parcelable {
     public String name;
     public String date;
     public String description;
 
-    public NotesEntity(String name, String date, String description){
+    public NotesEntity(String name, String date, String description) {
         this.name = name;
         this.date = date;
         this.description = description;
+    }
+
+    protected NotesEntity(Parcel in) {
+        name = in.readString();
+        date = in.readString();
+        description = in.readString();
+    }
+
+    public static final Creator<NotesEntity> CREATOR = new Creator<NotesEntity>() {
+        @Override
+        public NotesEntity createFromParcel(Parcel in) {
+            return new NotesEntity(in);
+        }
+
+        @Override
+        public NotesEntity[] newArray(int size) {
+            return new NotesEntity[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeString(description);
     }
 }

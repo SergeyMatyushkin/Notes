@@ -16,9 +16,17 @@
         android:text="@string/text_button_open_notes"
         android:textSize="@dimen/button_save_text_size" />
 
+    <TextView
+        android:id="@+id/result_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/result_text_margin"
+        android:text="заметка"
+        android:textSize="@dimen/result_text_size"/>
+
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="18dp" />
 
 </LinearLayout>
