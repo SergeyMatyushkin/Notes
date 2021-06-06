@@ -33,21 +33,17 @@ public class ProfileFragment extends Fragment {
         return fragment;
     }
 
-    public interface Controller {
-        void saveResult(NotesEntity myNotes);
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, null);
+        nameEt = view.findViewById(R.id.name_note);
         dateEt = view.findViewById(R.id.note_date);
         descriptionEt = view.findViewById(R.id.description_note);
 
         saveButton = view.findViewById((R.id.save_button));
-        saveButton.setOnClickListener(v->{
-            Controller controller = (Controller)getActivity();
+        saveButton.setOnClickListener(v -> {
+            Controller controller = (Controller) getActivity();
             controller.saveResult(new NotesEntity(
                     nameEt.getText().toString(),
                     dateEt.getText().toString(),
@@ -57,6 +53,7 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    @Override
     public void onViewCreated(View view, Bundle saveInstanceState) {
         nameEt.setText(myNotes.name);
         dateEt.setText(myNotes.date);
@@ -73,6 +70,10 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    public interface Controller {
+        void saveResult(NotesEntity myNotes);
+
+    }
 
 
 }

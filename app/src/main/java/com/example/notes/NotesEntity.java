@@ -8,6 +8,12 @@ public class NotesEntity implements Parcelable {
     public String date;
     public String description;
 
+    @Override
+    public String toString() {
+
+        return name + ' ' + date + ' ' + description;
+    }
+
     public NotesEntity(String name, String date, String description) {
         this.name = name;
         this.date = date;
@@ -18,6 +24,18 @@ public class NotesEntity implements Parcelable {
         name = in.readString();
         date = in.readString();
         description = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(date);
+        dest.writeString(description);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<NotesEntity> CREATOR = new Creator<NotesEntity>() {
@@ -32,15 +50,5 @@ public class NotesEntity implements Parcelable {
         }
     };
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(date);
-        dest.writeString(description);
-    }
 }

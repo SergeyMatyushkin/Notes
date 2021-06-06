@@ -2,39 +2,44 @@ package com.example.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements ProfileFragment.Controller{
-
-    private TextView resultTextView;
-
-    private NotesEntity myNotes = new NotesEntity("Встреча", "20.07.2021", "Обязательно взять с собой Николая Петровича и документы по " +
-            "Фонду");
-    private ProfileFragment profileFragment = ProfileFragment.newInstance(myNotes);
+public class MainActivity extends AppCompatActivity implements ProfileFragment.Controller,
+        ProfileListFragment.Controller {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        resultTextView = findViewById(R.id.result_text_view);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container, new ProfileListFragment())
+                .commit();
 
-        findViewById(R.id.open_notes).setOnClickListener(v -> {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragment_container, profileFragment)
-                    .commit();
-        });
+
     }
+
 
     @Override
     public void saveResult(NotesEntity myNotes) {
 
-    resultTextView.setText(String.format("%s %s %s",
-            myNotes.name,
-            myNotes.date,
-            myNotes.description));
+    }
+
+    @Override
+    public void openProfileScreen(NotesEntity myNotes) {
+
+        boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(isLandscape ? R.id.detail_container : R.id.container, ProfileFragment.newInstance(myNotes))
+                .addToBackStack(null)
+                .commit();
 
     }
 }
