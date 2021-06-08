@@ -7,4 +7,5 @@
     <string name="description_edit_text">описание заметки</string>
     <string name="text_button_save">Сохранить</string>
     <string name="text_button_open_notes">Open notes</string>
+    <string name="menu_title">menu_title</string>
 </resources>
