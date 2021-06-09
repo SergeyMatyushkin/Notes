@@ -9,4 +9,11 @@
     <dimen name="result_text_margin">6dp</dimen>
 
 
+
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="nav_header_dimen">42sp</dimen>
+
+
+
+
 </resources>
